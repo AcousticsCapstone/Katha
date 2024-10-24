@@ -1,0 +1,267 @@
+/* Main container styles */
+.Quiz {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: var(--second-font), Arial, sans-serif;
+}
+
+/* Header styles */
+.Quiz h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-family: var(--second-font), sans-serif;
+}
+
+.Quiz h2 {
+  font-size: 2rem;
+  text-align: center;
+  color: #666;
+  margin: 2rem 0;
+  font-family: var(--second-font), sans-serif;
+}
+
+/* Form styles */
+.Quiz form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Question container styles */
+.question {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#question {
+  font-family: var(--second-font), sans-serif;
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+  text-align: left;
+  padding: 0;
+}
+
+/* Radio button and label styles */
+.input {
+  display: block;
+  margin: 1rem 0;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #4a4a4a;
+}
+
+#option {
+  margin-right: 0.75rem;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Textarea styles for open-ended questions */
+textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  border: 2px solid #dde1e3;
+  border-radius: 8px;
+  font-family: var(--second-font), Arial, sans-serif;
+  font-size: 1rem;
+  resize: vertical;
+  margin-top: 1rem;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: hsl(28, 88%, 62%);
+  box-shadow: 0 0 0 2px rgba(255, 159, 67, 0.2);
+}
+
+/* Submit button styles */
+#submit {
+  background-color: hsl(28, 88%, 62%);
+  color: white;
+  font-family: var(--second-font), sans-serif;
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  margin: 2rem auto;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+#submit:hover {
+  background-color: hsl(28, 88%, 57%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#submit:active {
+  transform: translateY(0);
+}
+
+/* Quiz cards styles for teacher/admin view */
+.quiz-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.quiz-card {
+  background-color: #ffffff;
+  border: 1px solid #eaecef;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-card h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-family: var(--second-font), sans-serif;
+}
+
+/* Question display in quiz cards */
+.question-text, .correct-answer {
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  margin: 1rem 0;
+  line-height: 1.4;
+}
+
+.options-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.options-list li {
+  background-color: #f8f9fa;
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #565656;
+  transition: background-color 0.2s ease;
+}
+
+.options-list li:hover {
+  background-color: #eef0f2;
+}
+
+/* Message styles */
+.Quiz p[role="alert"] {
+  text-align: center;
+  color: #e74c3c;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .Quiz {
+    padding: 1rem;
+  }
+
+  .Quiz h1 {
+    font-size: 2rem;
+  }
+
+  .Quiz h2 {
+    font-size: 1.5rem;
+  }
+
+  #question {
+    font-size: 1.3rem;
+  }
+
+  .quiz-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-card {
+    width: 100%;
+  }
+}
+
+/* Material-UI overrides */
+.MuiTypography-h1,
+.MuiTypography-body1,
+.MuiTypography-root,
+.MuiButton-root,
+.MuiInputBase-root,
+.MuiMenuItem-root {
+  font-family: var(--second-font), Arial, sans-serif !important;
+}
+
+.quiz-title-input {
+  font-family: var(--second-font), Arial, sans-serif !important;
+  font-size: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+.input {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  gap: 0.5rem; /* Adds consistent spacing between radio button and label text */
+}
+
+#option {
+  margin-left: 2rem;
+  margin-right: 2rem; /* Remove default margins */
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* True/False specific styles */
+.question label.input {
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  margin: 1rem;
+}
+
+.question label.input:hover {
+  background-color: #f0f0f0;
+}
+
+/* Container for true/false options */
+.question .true-false-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Add these to your existing styles */
+input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* Style for the question text */
+#question {
+  margin-bottom: 1rem;
+}

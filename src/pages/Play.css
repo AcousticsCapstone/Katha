@@ -1,0 +1,16 @@
+
+  #full-width {
+    width: 100%; /* Take full width */
+    border-radius: 3%;
+    padding: 2rem;
+  }
+  .title{
+    font-family: var(--og-font);
+  }
+  .description{
+    font-family: var(--second-font);
+  }
+
+  
+  /* Other styles for remaining elements... */
+  

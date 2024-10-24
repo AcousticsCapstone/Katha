@@ -1,0 +1,41 @@
+.title{
+  font-family: var(--og-font);
+    font-size: 3rem;
+    color: #333;
+}
+.description{
+    font-family: var(--og-font);
+    font-size: 1.5rem;
+    color: #333;
+}
+body {
+  padding-top: 5%;
+  
+}
+section{
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+#button{
+  font-family: var(--second-font);
+}
+
+#full-width {
+    width: 100%; 
+    /* background-color: rgba(255, 255, 255, 0.4); */
+    border-radius: 3%;
+    /* responsive */
+    
+  }
+  
+  
+  #spacerDiv{
+    height: 2rem;
+  }
+img{
+  margin: 0 auto;
+  
+}
+
+  

@@ -1,0 +1,35 @@
+.container {
+    background-color: rgb(223, 235, 217);
+  }
+  
+  .heading {
+    color: var(--first-color);
+  }
+  
+  .label-game-code {
+    color: var(--first-color);
+  }
+  
+  .input-game-code {
+    color: var(--first-color);
+    background-color: white;
+    color: var(--first-color);
+  }
+  
+  .label-name {
+    color: var(--first-color);
+  }
+  
+  .input-name {
+    border-color: var(--first-color);
+    background-color: white;
+    color: var(--first-color);
+  }
+  
+  .button-join-game {
+    background-color: #FFA500;
+    color: black;
+  }
+*{
+    font-family: var(--second-font);
+}  
