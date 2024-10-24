@@ -87,7 +87,7 @@ textarea:focus {
 /* Submit button styles */
 #submit {
   background-color: hsl(28, 88%, 62%);
-  color: white;
+  color: black;
   font-family: var(--second-font), sans-serif;
   font-size: 1.2rem;
   padding: 1rem 2rem;
@@ -265,3 +265,4 @@ input[type="radio"] {
 #question {
   margin-bottom: 1rem;
 }
+

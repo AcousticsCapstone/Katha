@@ -1,13 +1,13 @@
 
 const TeamMember = ({ name, role, imageSrc }: { name: string; role: string; imageSrc: string }) => (
   <div className="flex flex-col items-center p-4">
-    <img 
-      src={imageSrc} 
-      alt={name} 
+    <img
+      src={imageSrc}
+      alt={name}
       className="w-48 h-48 rounded-full object-cover mb-4 border-4 border-amber-600"
     />
-    <h3 className="text-xl font-bold text-amber-800">{name}</h3>
-    <p className="text-amber-700">{role}</p>
+    <h1 className="text-xl font-bold text-black">{name}</h1>
+    <p className="text-black">{role}</p>
   </div>
 );
 

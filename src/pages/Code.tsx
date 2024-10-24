@@ -62,8 +62,8 @@ const GenerateCodePage = () => {
           display: 'block',
           width: '100%',
           padding: '10px',
-          backgroundColor: '#007bff',
-          color: 'white',
+          backgroundColor: '#f39849',
+          color: 'black',
           border: 'none',
           borderRadius: '4px',
           cursor: 'pointer'

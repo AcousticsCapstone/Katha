@@ -109,11 +109,12 @@
 }
 
 .status-badge.active {
-  background-color: #2ecc71;
+  background-color: #186538;
+  
 }
 
 .error-text {
-  color: #e74c3c;
+  color: black;
   text-align: center;
 }
 

@@ -1,13 +1,13 @@
-  import { useState } from 'react';
-  import './Assessment.css';
-  import TextField from '@mui/material/TextField';
-  import Button from '@mui/material/Button';
-  import MenuItem from '@mui/material/MenuItem';
-  import Select from '@mui/material/Select';
-  import api from '../utils/api';
-  import { Paper, Typography, Box } from '@mui/material';
-  import DeleteIcon from '@mui/icons-material/Delete';
-  import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { useState } from 'react';
+import './Assessment.css';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import api from '../utils/api';
+import { Paper, Typography, Box, InputLabel, FormControl } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
   interface Question {
     type: string;
@@ -153,10 +153,12 @@
 
     return (
       <Box className="Assessment custom-font" sx={{ maxWidth: 800, margin: 'auto', padding: 3 }}>
-        <Typography variant="h4" component="h1" gutterBottom className="quiz-title">
+        <Typography variant="h1" gutterBottom className="quiz-title" sx={{ fontSize: '3rem' }} >
           Create Quiz
         </Typography>
-        {message && <Typography color="error">{message}</Typography>}
+        
+        {message && <Typography color="error" role="alert">{message}</Typography>}
+        
         <Paper elevation={3} sx={{ padding: 3, marginBottom: 3 }}>
           <TextField
             fullWidth
@@ -169,31 +171,41 @@
             error={!!errorMessages.quizTitle}
             helperText={errorMessages.quizTitle}
             className="quiz-title-input"
+            id="quiz-title"
+            aria-label="Quiz Title"
           />
+          
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 2 }}>
             <Button
               onClick={handleGenerateCode}
               variant="contained"
               color="primary"
               startIcon={<AddCircleIcon />}
+              aria-label="Generate Quiz Code"
             >
               Generate Code
             </Button>
             {generatedCode && (
-              <Typography variant="body1">
+              <Typography variant="body1" role="status">
                 Your generated code is: <strong>{generatedCode}</strong>
               </Typography>
             )}
             {errorMessages.generatedCode && (
-              <Typography color="error">{errorMessages.generatedCode}</Typography>
+              <Typography color="error" role="alert">{errorMessages.generatedCode}</Typography>
             )}
           </Box>
         </Paper>
-
-        {/* Questions */}
+  
+        {/* Questions List */}
+        {questions.length > 0 && (
+          <Typography variant="h2" gutterBottom>
+            Questions
+          </Typography>
+        )}
+        
         {questions.map((question, index) => (
           <Paper key={index} elevation={2} sx={{ padding: 2, marginBottom: 2 }}>
-            <Typography variant="h6" gutterBottom className="quiz-title">
+            <Typography variant="h3" gutterBottom className="quiz-title">
               Question {index + 1}
             </Typography>
             <Typography variant="body1">Type: {question.type}</Typography>
@@ -224,17 +236,20 @@
           </Paper>
         ))}
 
-        <Paper elevation={3} sx={{ padding: 3, marginTop: 3 }}>
-          <Typography variant="h5" gutterBottom>
-            Add a Question
-          </Typography>
+<Paper elevation={3} sx={{ padding: 3, marginTop: 3 }}>
+        <Typography variant="h2" gutterBottom sx={{ fontSize: '2.5rem' }}>
+          Add a Question
+        </Typography>
+        
+        <FormControl fullWidth margin="dense">
+          <InputLabel id="question-type-label">Select question type</InputLabel>
           <Select
-            fullWidth
+            labelId="question-type-label"
+            id="question-type"
             value={currentQuestionType}
             onChange={(e) => setCurrentQuestionType(e.target.value as 'multipleChoice' | 'openEnded' | 'trueOrFalse' | '')}
-            displayEmpty
-            margin="dense"
-            variant="outlined"
+            label="Select question type"
+            aria-label="Question Type"
           >
             <MenuItem value="" disabled>Select question type</MenuItem>
             {questionTypes.map((type) => (
@@ -243,91 +258,102 @@
               </MenuItem>
             ))}
           </Select>
-          {currentQuestionType && (
-              <Box sx={{ width: '400px', margin: '0 auto' }}>
-              {message && <Typography color="error">{message}</Typography>}
-              <TextField
-                fullWidth
-                label="Question Text"
-                value={currentQuestionText}
-                onChange={(e) => setCurrentQuestionText(e.target.value)}
-                margin="dense"
-                variant="outlined"
-                required
-              />
-        
-              {currentQuestionType === 'multipleChoice' && (
-                <>
-                  {currentOptions.map((option, index) => (
-                    <TextField
-                      key={index}
-                      fullWidth
-                      label={`Option ${index + 1}`}
-                      value={option}
-                      onChange={(e) => {
-                        const newOptions = [...currentOptions];
-                        newOptions[index] = e.target.value;
-                        setCurrentOptions(newOptions);
-                      }}
-                      margin="normal"
-                      variant="outlined"
-                      required
-                    />
-                  ))}
+        </FormControl>
+
+        {currentQuestionType && (
+          <Box sx={{ width: '400px', margin: '0 auto' }}>
+            {message && <Typography color="error" role="alert">{message}</Typography>}
+            
+            <TextField
+              fullWidth
+              label="Question Text"
+              value={currentQuestionText}
+              onChange={(e) => setCurrentQuestionText(e.target.value)}
+              margin="dense"
+              variant="outlined"
+              required
+              id="question-text"
+              aria-label="Question Text"
+            />
+
+            {currentQuestionType === 'multipleChoice' && (
+              <>
+                {currentOptions.map((option, index) => (
                   <TextField
+                    key={index}
                     fullWidth
-                    label="Correct Answer"
-                    value={currentCorrectAnswer}
-                    onChange={(e) => setCurrentCorrectAnswer(e.target.value)}
+                    label={`Option ${index + 1}`}
+                    value={option}
+                    onChange={(e) => {
+                      const newOptions = [...currentOptions];
+                      newOptions[index] = e.target.value;
+                      setCurrentOptions(newOptions);
+                    }}
                     margin="normal"
                     variant="outlined"
                     required
+                    id={`option-${index + 1}`}
+                    aria-label={`Option ${index + 1}`}
                   />
-                </>
-              )}
-        
-              {currentQuestionType === 'trueOrFalse' && (
-                <>
-                  <Select
-                    fullWidth
-                    value={currentCorrectAnswer}
-                    onChange={(e) => setCurrentCorrectAnswer(e.target.value)}
-                    margin="dense"
-                    variant="outlined"
-                    displayEmpty
-                    required
-                  >
-                    <MenuItem value="" disabled>Select True/False</MenuItem>
-                    <MenuItem value="true">True</MenuItem>
-                    <MenuItem value="false">False</MenuItem>
-                  </Select>
-                </>
-              )}
-              <Button
-                onClick={handleAddQuestion}
-                variant="contained"
-                color="primary"
-                startIcon={<AddCircleIcon />}
-                sx={{ marginTop: 2 }}
-              >
-                Add Question
-              </Button>
-            </Box>
-          )}
-        </Paper>
+                ))}
+                <TextField
+                  fullWidth
+                  label="Correct Answer"
+                  value={currentCorrectAnswer}
+                  onChange={(e) => setCurrentCorrectAnswer(e.target.value)}
+                  margin="normal"
+                  variant="outlined"
+                  required
+                  id="correct-answer"
+                  aria-label="Correct Answer"
+                />
+              </>
+            )}
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 3 }}>
-          <Button
-            onClick={handleSaveQuiz}
-            variant="contained"
-            color="success"
-            size="large"
-          >
-            Save Quiz
-          </Button>
-        </Box>
+            {currentQuestionType === 'trueOrFalse' && (
+              <FormControl fullWidth margin="dense">
+                <InputLabel id="true-false-label">Select True/False</InputLabel>
+                <Select
+                  labelId="true-false-label"
+                  id="true-false"
+                  value={currentCorrectAnswer}
+                  onChange={(e) => setCurrentCorrectAnswer(e.target.value)}
+                  label="Select True/False"
+                  aria-label="True or False Answer"
+                >
+                  <MenuItem value="" disabled>Select True/False</MenuItem>
+                  <MenuItem value="true">True</MenuItem>
+                  <MenuItem value="false">False</MenuItem>
+                </Select>
+              </FormControl>
+            )}
+
+            <Button
+              onClick={handleAddQuestion}
+              variant="contained"
+              color="primary"
+              startIcon={<AddCircleIcon />}
+              sx={{ marginTop: 2 }}
+              aria-label="Add Question to Quiz"
+            >
+              Add Question
+            </Button>
+          </Box>
+        )}
+      </Paper>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 3 }}>
+        <Button
+          onClick={handleSaveQuiz}
+          variant="contained"
+          color="success"
+          size="large"
+          aria-label="Save Quiz"
+        >
+          Save Quiz
+        </Button>
       </Box>
-    );
-  }
-
+    </Box>
+  );
+}
   export default Assessment;
