@@ -1,9 +1,9 @@
-import React, { useState, FormEvent, useEffect } from 'react';
-import axios from 'axios';
-import './Login.css';
-import { useNavigate } from 'react-router-dom';
-import api from '../utils/api';
-import { useAuth } from '../utils/AuthContext';
+import React, { useState, FormEvent, useEffect } from "react";
+import axios from "axios";
+import "./Login.css";
+import { useNavigate } from "react-router-dom";
+import api from "../utils/api";
+import { useAuth } from "../utils/AuthContext";
 
 interface FormData {
   email: string;
@@ -21,11 +21,11 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [formData, setFormData] = useState<FormData>({
-    email: '',
-    password: '',
-    username: '',
+    email: "",
+    password: "",
+    username: "",
   });
-  const [message, setMessage] = useState<string>('');
+  const [message, setMessage] = useState<string>("");
   const [attempts, setAttempts] = useState<number>(0);
 
   useEffect(() => {
@@ -50,77 +50,87 @@ const Login: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prevData => ({ ...prevData, [name]: value }));
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-
 
   const validatePassword = (password: string) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
   };
-  
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
+
     if (!validatePassword(formData.password)) {
-      setMessage('Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.');
+      setMessage(
+        "Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character."
+      );
       return;
     }
-  
+
     if (isLocked) {
-      setMessage(`Account is locked. Please try again in ${remainingTime} seconds.`);
+      setMessage(
+        `Account is locked. Please try again in ${remainingTime} seconds.`
+      );
       return;
     }
-  
+
     try {
-      const endpoint = isLogin ? '/login' : '/register';
+      const endpoint = isLogin ? "/login" : "/register";
       const response = await api.post(endpoint, formData);
-  
+
       if (isLogin && response.data.token) {
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem("token", response.data.token);
         login(response.data.token, response.data.accountType);
-        setMessage('Login successful!');
-        navigate('/'); // Redirect to dashboard
+        setMessage("Login successful!");
+        navigate("/"); // Redirect to dashboard
       } else {
-        setAttempts(prev => prev + 1);
+        setAttempts((prev) => prev + 1);
         if (attempts + 1 >= MAX_ATTEMPTS) {
           setIsLocked(true);
-          setMessage('Too many failed attempts. Your account is locked for 15 minutes.');
+          setMessage(
+            "Too many failed attempts. Your account is locked for 15 minutes."
+          );
         } else {
           setMessage(response.data.message);
         }
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        setAttempts(prev => prev + 1);
-        setMessage(error.response.data.message || 'An error occurred');
+        setAttempts((prev) => prev + 1);
+        setMessage(error.response.data.message || "An error occurred");
       } else {
-        setMessage('An unexpected error occurred');
+        setMessage("An unexpected error occurred");
       }
-  
+
       // Lock user if the maximum attempts are reached
       if (attempts + 1 >= MAX_ATTEMPTS) {
         setIsLocked(true);
-        setMessage('Too many failed attempts. Your account is locked for 15 minutes.');
+        setMessage(
+          "Too many failed attempts. Your account is locked for 15 minutes."
+        );
       }
     }
   };
 
   return (
     <div className="row full-height justify-content-center">
-      <div className="col-12 text-center align-self-center py-5">
-        <div className="section pb-5 pt-5 pt-sm-2 text-center">
-          <h6 className="mb-0 pb-3">
-            <span>Log In </span>
-            <span>Sign Up</span>
-          </h6>
-          <input
-            className="checkbox"
-            type="checkbox"
-            id="reg-log"
-            name="reg-log"
-            onChange={() => setIsLogin(!isLogin)}
-          />
+  <div className="col-12 text-center align-self-center py-5">
+    <div className="section pb-5 pt-5 pt-sm-2 text-center">
+      <h6 className="mb-0 pb-3">
+        <label htmlFor="reg-log">
+          <span>Log In</span>
+          <span>Sign Up</span>
+        </label>
+      </h6>
+      <input
+        className="checkbox"
+        type="checkbox"
+        id="reg-log"
+        name="reg-log"
+        onChange={() => setIsLogin(!isLogin)}
+      />
           <label htmlFor="reg-log"></label>
           <div className="card-3d-wrap mx-auto">
             <div className="card-3d-wrapper">
@@ -153,8 +163,18 @@ const Login: React.FC = () => {
                         />
                         <i className="input-icon uil uil-lock-alt"></i>
                       </div>
-                      <button className="btn mt-4" type="submit" disabled={isLocked}>Mag-login</button>
-                      {message && <p className="error-message" style={{ color: 'red' }}>{message}</p>}
+                      <button
+                        className="btn mt-4"
+                        type="submit"
+                        disabled={isLocked}
+                      >
+                        Mag-login
+                      </button>
+                      {message && (
+                        <p className="error-message" style={{ color: "red" }}>
+                          {message}
+                        </p>
+                      )}
                     </form>
                   </div>
                 </div>
@@ -200,8 +220,14 @@ const Login: React.FC = () => {
                         />
                         <i className="input-icon uil uil-lock-alt"></i>
                       </div>
-                      <button className="btn mt-4" type="submit">Magrehistro</button>
-                      {message && <p className="error-message" style={{ color: 'red' }}>{message}</p>}
+                      <button className="btn mt-4" type="submit">
+                        Magrehistro
+                      </button>
+                      {message && (
+                        <p className="error-message" style={{ color: "red" }}>
+                          {message}
+                        </p>
+                      )}
                     </form>
                   </div>
                 </div>
@@ -212,6 +238,6 @@ const Login: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

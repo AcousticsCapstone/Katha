@@ -3,27 +3,26 @@
   }
   
   .heading {
-    color: var(--first-color);
+    color: black;
   }
   
   .label-game-code {
-    color: var(--first-color);
+    color: black;
   }
   
   .input-game-code {
-    color: var(--first-color);
+    color: black;
     background-color: white;
-    color: var(--first-color);
   }
   
   .label-name {
-    color: var(--first-color);
+    color: black;
   }
   
   .input-name {
     border-color: var(--first-color);
     background-color: white;
-    color: var(--first-color);
+    color: black;
   }
   
   .button-join-game {
