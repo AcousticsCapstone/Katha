@@ -19,28 +19,10 @@ import CreateAssessment from "./pages/CreateAssessment";
 import { AuthProvider } from "./utils/AuthContext";
 import { AdminPageComponent } from "./components/admin-page";
 import CheckedQuizzesPage from "./pages/StudentsQuizzes";
-import { Helmet } from "react-helmet-async";
 
 function App() {
   return (
     <>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>My React App</title>
-          <meta name="description" content="A React application" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta httpEquiv="X-Frame-Options" content="DENY" />
-          <meta httpEquiv="Content-Security-Policy" content={`
-            default-src 'self';
-            script-src 'self' 'nonce-YOUR_NONCE_VALUE';
-            style-src 'self' 'nonce-YOUR_NONCE_VALUE';
-            img-src 'self';
-            connect-src 'self';
-            font-src 'self';
-            object-src 'none';
-            media-src 'self';
-          `} />
-        </Helmet>
       <AuthProvider>
         <Router>
           {/* <ResponsiveHeader /> */}
