@@ -62,43 +62,46 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="header">
-      <nav className="nav container">
-      <img src="/KathaLogo.webp" alt="Image" style={{width:"4rem"}}/>
-        <NavLink to="/" className="nav__logo">
-          Katha
-        </NavLink>
-        <div className={`nav__menu ${showMenu ? 'show-menu' : ''}`} id="nav-menu">
-          <ul className="nav__list">
-            {navItems.map((item, index) => (
-              <li key={index} className="nav__item">
-                <NavLink to={item.to} className="nav__link" onClick={closeMenuOnMobile}>
-                  {item.text}
-                </NavLink>
-              </li>
-            ))}
-            {isAuthenticated ? (
-              <li className="nav__item">
-                <button onClick={handleLogout} className="nav__link nav__cta" id='loginBtn'>
-                  Mag-logout
-                </button>
-              </li>
-            ) : (
-              <li className="nav__item">
-                <NavLink to="/user-type-selection" className="nav__link nav__cta" id='loginBtn'>
-                  Mag-login
-                </NavLink>
-              </li>
-            )}
-          </ul>
-          <div className="nav__close" id="nav-close" onClick={toggleMenu}>
-            <IoClose />
-          </div>
-        </div>
-        <div className="nav__toggle" id="nav-toggle" onClick={toggleMenu}>
-          <IoMenu />
-        </div>
-      </nav>
-    </header>
+  <nav className="nav container">
+    <div className="nav__logo-container">
+      <img src="/KathaLogo.webp" alt="Image" style={{ width: "4rem" }} />
+      <NavLink to="/" className="nav__logo">
+        Katha
+      </NavLink>
+    </div>
+    <div className={`nav__menu ${showMenu ? 'show-menu' : ''}`} id="nav-menu">
+      <ul className="nav__list">
+        {navItems.map((item, index) => (
+          <li key={index} className="nav__item">
+            <NavLink to={item.to} className="nav__link" onClick={closeMenuOnMobile}>
+              {item.text}
+            </NavLink>
+          </li>
+        ))}
+        {isAuthenticated ? (
+          <li className="nav__item">
+            <button onClick={handleLogout} className="nav__link nav__cta" id="loginBtn">
+              Mag-logout
+            </button>
+          </li>
+        ) : (
+          <li className="nav__item">
+            <NavLink to="/user-type-selection" className="nav__link nav__cta" id="loginBtn">
+              Mag-login
+            </NavLink>
+          </li>
+        )}
+      </ul>
+      <div className="nav__close" id="nav-close" onClick={toggleMenu}>
+        <IoClose />
+      </div>
+    </div>
+    <div className="nav__toggle" id="nav-toggle" onClick={toggleMenu}>
+      <IoMenu />
+    </div>
+  </nav>
+</header>
+
   );
 };
 
