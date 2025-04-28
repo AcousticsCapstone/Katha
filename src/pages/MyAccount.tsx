@@ -84,61 +84,76 @@ const MyAccount: React.FC = () => {
         <div className="card">
           <h1>{userDetails.username}</h1>
           <p className="userDetails">
-            Account Type: {userDetails.accountType === "student" ? "Student" : "Teacher"}
+            Account Type:{" "}
+            {userDetails.accountType === "student" ? "Student" : "Teacher"}
             <br />
             Email Address: {userDetails.email}
           </p>
-          <button className="card-button" onClick={() => navigate("/change-password")}>
+          <button
+            className="card-button"
+            onClick={() => navigate("/change-password")}
+          >
             Change Password
           </button>
         </div>
 
         {userDetails.accountType === "teacher" && (
-  <div className="card teacher-codes-card">
-    <h1 className="card-title">Generated Codes</h1>
-    
-    <div className="codes-container">
-      {loading ? (
-        <div className="loading-container">
-          <p>Loading codes...</p>
-          <div className="spinner"></div> {/* Optional: Add a spinner here for better user experience */}
-        </div>
-      ) : error ? (
-        <p className="error-text">{error}</p>
-      ) : codes.length === 0 ? (
-        <p className="no-codes-text">No codes have been generated yet.</p>
-      ) : (
-        <table className="codes-table">
-          <thead>
-            <tr>
-              <th>Code</th>
-              <th>Created At</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {codes.map((code, index) => (
-              <tr key={index} className={code.isExpired ? "code-row expired" : "code-row active"}>
-                <td>{code.code}</td>
-                <td>{formatDate(code.createdAt)}</td>
-                <td>
-                  {code.isExpired ? (
-                    <span className="status-badge expired">Expired</span>
-                  ) : (
-                    <span className="status-badge active">
-                      Active ({Math.floor(code.remainingTime / 60)}h {code.remainingTime % 60}m remaining)
-                    </span>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
-  </div>
-)}
+          <div className="card teacher-codes-card">
+            <h1 className="card-title">Generated Codes</h1>
 
+            <div className="codes-container">
+              {loading ? (
+                <div className="loading-container">
+                  <p>Loading codes...</p>
+                  <div className="spinner"></div>
+                </div>
+              ) : error && error !== "404" ? ( // <-- only show error if it's NOT 404
+                <p className="error-text">{error}</p>
+              ) : codes.length === 0 ? (
+                <p className="no-codes-text">
+                  No codes have been generated yet.
+                </p>
+              ) : (
+                <table className="codes-table">
+                  <thead>
+                    <tr>
+                      <th>Code</th>
+                      <th>Created At</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {codes.map((code, index) => (
+                      <tr
+                        key={index}
+                        className={
+                          code.isExpired
+                            ? "code-row expired"
+                            : "code-row active"
+                        }
+                      >
+                        <td>{code.code}</td>
+                        <td>{formatDate(code.createdAt)}</td>
+                        <td>
+                          {code.isExpired ? (
+                            <span className="status-badge expired">
+                              Expired
+                            </span>
+                          ) : (
+                            <span className="status-badge active">
+                              Active ({Math.floor(code.remainingTime / 60)}h{" "}
+                              {code.remainingTime % 60}m remaining)
+                            </span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </div>
+        )}
 
         {userDetails.accountType === "admin" && (
           <div className="card">
