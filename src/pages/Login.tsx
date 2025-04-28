@@ -120,8 +120,8 @@ const Login: React.FC = () => {
     <div className="section pb-5 pt-5 pt-sm-2 text-center">
       <h6 className="mb-0 pb-3">
         <label htmlFor="reg-log">
-          <span>Log In</span>
-          <span>Sign Up</span>
+          <span>Mag-login</span>
+          <span>Magrehistro</span>
         </label>
       </h6>
       <input
