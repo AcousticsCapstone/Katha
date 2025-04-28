@@ -59,7 +59,7 @@ export function StudentLogin() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="code" className="block text-sm font-medium label-game-code">
-                Game Code
+                Class Code
               </label>
               <input
                 type="text"
