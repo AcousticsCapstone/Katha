@@ -93,6 +93,25 @@
 .nav__item {
   padding: 0 1.5vw;
 }
+.nav__logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Adjust the gap between the logo image and the text */
+}
+
+.header img {
+  width: 4rem; /* Logo size */
+  height: auto; /* Ensure the aspect ratio of the logo stays intact */
+  margin: 0; /* Remove margin to ensure no space around the logo */
+}
+
+.nav__logo {
+  font-size: 2.5rem; /* Adjust the size of the text */
+  color: black;
+  font-family: var(--og-font);
+  margin: 0; /* Remove margin around the text */
+  padding: 0; /* Ensure no padding around the text */
+}
 
 /* Responsive */
 @media screen and (min-width: 768px) {
