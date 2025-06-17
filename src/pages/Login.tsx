@@ -64,14 +64,14 @@ const Login: React.FC = () => {
 
     if (!validatePassword(formData.password)) {
       setMessage(
-        "Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character."
+        "Ang password ay dapat mayroong hindi bababa sa 8 karakter, kasama ang malaking titik, maliit na titik, numero, at espesyal na karakter."
       );
       return;
     }
 
     if (isLocked) {
       setMessage(
-        `Account is locked. Please try again in ${remainingTime} seconds.`
+        `Naka-lock ang account. Pakisubukang muli sa ${remainingTime} segundo.`
       );
       return;
     }
@@ -90,7 +90,7 @@ const Login: React.FC = () => {
         if (attempts + 1 >= MAX_ATTEMPTS) {
           setIsLocked(true);
           setMessage(
-            "Too many failed attempts. Your account is locked for 15 minutes."
+            "Maraming beses kang nagkamali. Naka-lock ang iyong account sa loob ng 15 minuto."
           );
         } else {
           setMessage(response.data.message);
@@ -99,16 +99,16 @@ const Login: React.FC = () => {
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         setAttempts((prev) => prev + 1);
-        setMessage(error.response.data.message || "An error occurred");
+        setMessage(error.response.data.message || "May maling problema sa pag-login. Pakisubukan muli.");
       } else {
-        setMessage("An unexpected error occurred");
+        setMessage("May hindi inaasahang error. Pakisubukan muli.");
       }
 
       // Lock user if the maximum attempts are reached
       if (attempts + 1 >= MAX_ATTEMPTS) {
         setIsLocked(true);
         setMessage(
-          "Too many failed attempts. Your account is locked for 15 minutes."
+          "Maraming beses kang nagkamali. Naka-lock ang iyong account sa loob ng 15 minuto."
         );
       }
     }
@@ -121,7 +121,7 @@ const Login: React.FC = () => {
       <h6 className="mb-0 pb-3">
         <label htmlFor="reg-log">
           <span>Mag-login</span>
-          <span>Magrehistro</span>
+          <span>Gumawa ng Account</span>
         </label>
       </h6>
       <input
@@ -137,7 +137,7 @@ const Login: React.FC = () => {
               <div className="card-front">
                 <div className="center-wrap">
                   <div className="section text-center">
-                    <h4 className="mb-4 pb-3">Log In</h4>
+                    <h4 className="mb-4 pb-3">Mag-login</h4>
                     <form onSubmit={handleSubmit}>
                       <div className="form-group mt-2">
                         <input
@@ -221,7 +221,7 @@ const Login: React.FC = () => {
                         <i className="input-icon uil uil-lock-alt"></i>
                       </div>
                       <button className="btn mt-4" type="submit">
-                        Magrehistro
+                        Gumawa ng Account
                       </button>
                       {message && (
                         <p className="error-message" style={{ color: "red" }}>

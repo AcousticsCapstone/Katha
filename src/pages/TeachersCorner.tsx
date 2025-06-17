@@ -87,9 +87,9 @@ function TeachersCorner() {
       <h1 className="page-title">Gabay sa Pagtuturo</h1>
 
       <div className="card create-code-card">
-        <h2 className="card-title">Gumawa ng Class Code</h2>
+        <h2 className="card-title">Gumawa ng Kodigo ng Klase</h2>
         <p className="description">
-          Gumawa ng class code para sa iyong mga estudyante.
+          Gumawa ng Kodigo ng Klase o class code para sa iyong mga estudyante.
         </p>
         <button 
           className="primary-button"

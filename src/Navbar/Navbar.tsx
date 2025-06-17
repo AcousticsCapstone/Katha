@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
   };
 
   const unauthenticatedNavItems = [
-    { to: "/", text: "Home" },
+    { to: "/", text: "Tahanan" },
     { to: "/about-us", text: "Tungkol sa Amin" },
   ];
 

@@ -59,7 +59,7 @@ export function StudentLogin() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="code" className="block text-sm font-medium label-game-code">
-                Class Code
+                Kodigo ng Klase
               </label>
               <input
                 type="text"
@@ -88,7 +88,7 @@ export function StudentLogin() {
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 button-join-game"
             >
-              Pumasok
+              Mag-login
             </button>
           </form>
         </div>
